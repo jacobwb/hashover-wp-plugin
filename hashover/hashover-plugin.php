@@ -38,7 +38,7 @@ function register_hashover ()
 	$script = '/hashover/hashover.js';
 
 	// Check if the comments are open
-	if (comments_open () === true) {
+	if (is_single () === true and comments_open () === true) {
 		// If so, register the HashOver script
 		wp_register_script ('hashover', $script, array (), 'next', true);
 	}
@@ -48,7 +48,7 @@ function register_hashover ()
 function enqueue_hashover ()
 {
 	// Check if the comments are open
-	if (comments_open () === true) {
+	if (is_single () === true and comments_open () === true) {
 		// If so, enqueue the HashOver script
 		wp_enqueue_script ('hashover');
 	}
@@ -58,9 +58,25 @@ function enqueue_hashover ()
 function hashover_elements_url ()
 {
 	// Check if the comments are open
-	if (comments_open () === true) {
+	if (is_single () === true and comments_open () === true) {
 		// Return HashOver HTML elements file path
 		return plugin_dir_path (__FILE__) . 'initial-html.php';
+	}
+}
+
+// Returns a HashOver count link JavaScript tag
+function hashover_count_link ()
+{
+	// Check if the comments are open
+	if (comments_open (get_the_ID ()) === true) {
+		// Get the post URL
+		$post_url = urlencode (get_permalink ());
+
+		// Construct the link count URL parameter
+		$script_url = '/hashover/api/count-link.php?url=' . $post_url;
+
+		// Return the JavaScript tag
+		return '<script type="text/javascript" src="' . $script_url . '"></script>';
 	}
 }
 
