@@ -76,7 +76,7 @@ function hashover_count_link ()
 		$script_url = '/hashover/api/count-link.php?url=' . $post_url;
 
 		// Return the JavaScript tag
-		return '<script type="text/javascript" src="' . $script_url . '"></script>';
+		return '<script id="hashover-loader" type="text/javascript" src="' . $script_url . '"></script>';
 	}
 }
 
