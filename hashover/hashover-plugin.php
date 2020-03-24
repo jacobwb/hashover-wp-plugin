@@ -35,7 +35,7 @@
 function register_hashover ()
 {
 	// HashOver script location
-	$script = '/hashover/hashover.js';
+	$script = '/hashover/comments.php';
 
 	// Check if the comments are open
 	if (is_single () === true and comments_open () === true) {
